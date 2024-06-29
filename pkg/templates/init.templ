@@ -1,0 +1,26 @@
+package templates
+
+templ InitPage(
+	action string,
+	errors []string,
+) {
+	<html>
+		@head("Admin password")
+		@InitContent(action, errors)
+	</html>
+}
+
+templ InitContent(
+	action string,
+	errors []string,
+) {
+	<body>
+		<h1>On first run setup admin password</h1>
+		@Errors(errors)
+		<form action={ templ.SafeURL(action) } method="post">
+			<label for="password">Password:</label>
+			<input type="password" id="password" name="password" required maxlength="72"/>
+			<input type="submit" value="Submit"/>
+		</form>
+	</body>
+}

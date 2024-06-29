@@ -1,0 +1,9 @@
+.vscode
+.local
+
+bin
+
+.env
+*.env
+*.sqlite3
+*.db

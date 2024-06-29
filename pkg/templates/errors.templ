@@ -1,0 +1,15 @@
+package templates
+
+templ Errors(
+	errors []string,
+) {
+	<div>
+		if len(errors) > 0 {
+			<ul style="color: red">
+				for _, err := range errors {
+					<li>{ err }</li>
+				}
+			</ul>
+		}
+	</div>
+}
