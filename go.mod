@@ -6,6 +6,7 @@ require (
 	github.com/a-h/templ v0.2.731
 	github.com/caarlos0/env/v10 v10.0.0
 	github.com/gin-gonic/gin v1.10.0
+	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/joho/godotenv v1.5.1
 	github.com/pkg/errors v0.9.1
 	github.com/samber/do v1.6.0

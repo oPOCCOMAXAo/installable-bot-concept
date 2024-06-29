@@ -1,23 +1,26 @@
 package templates
 
+type InitData struct {
+	Path string
+	Errors []string
+}
+
 templ InitPage(
-	action string,
-	errors []string,
+	data InitData,
 ) {
 	<html>
 		@head("Admin password")
-		@InitContent(action, errors)
+		@InitContent(data)
 	</html>
 }
 
 templ InitContent(
-	action string,
-	errors []string,
+	data InitData,
 ) {
-	<body>
+	<body hx-boost>
 		<h1>On first run setup admin password</h1>
-		@Errors(errors)
-		<form action={ templ.SafeURL(action) } method="post">
+		@Errors(data.Errors)
+		<form action={ templ.SafeURL(data.Path) } method="post">
 			<label for="password">Password:</label>
 			<input type="password" id="password" name="password" required maxlength="72"/>
 			<input type="submit" value="Submit"/>

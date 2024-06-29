@@ -1,15 +1,53 @@
 package templates
 
-templ DashboardPage() {
+import "github.com/opoccomaxao/installable-bot-concept/pkg/models"
+
+type DashboardData struct {
+	Params map[string]string
+	Errors []string
+}
+
+templ DashboardPage(
+	data DashboardData,
+) {
 	<html>
 		@head("Dashboard")
-		@DashboardContent()
+		@DashboardContent(data)
 	</html>
 }
 
-templ DashboardContent() {
-	<body>
+templ DashboardContent(
+	data DashboardData,
+) {
+	<body hx-boost>
 		<h1>Dashboard</h1>
-		<p>Welcome to the dashboard!</p>
+		@Errors(data.Errors)
+		<div>
+			<h2>Params</h2>
+			<ul>
+				for key, value := range data.Params {
+					<li>{ key }: { value }</li>
+				}
+			</ul>
+		</div>
+		<div>
+			<h2>Actions</h2>
+			<p>
+				<button type="button" hx-post="/increment" hx-swap="none">Increment counter</button>
+			</p>
+			<p>
+				<form hx-post="/key" hx-swap="none">
+					<label for="key">Key:</label>
+					<input name="key" id="key" value={ data.Params[string(models.ParamKey)] }/>
+					<input type="submit" value="Submit"/>
+				</form>
+			</p>
+			<p>
+				<button type="button" hx-post="/logout" hx-swap="none">Logout</button>
+			</p>
+			<p>
+				<button type="button" hx-post="/expire" hx-swap="none">Expire authorization</button>
+			</p>
+		</div>
 	</body>
 }

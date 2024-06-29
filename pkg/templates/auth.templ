@@ -1,0 +1,29 @@
+package templates
+
+type AuthData struct {
+	Path   string
+	Errors []string
+}
+
+templ AuthPage(
+	data AuthData,
+) {
+	<html>
+		@head("Auth")
+		@AuthContent(data)
+	</html>
+}
+
+templ AuthContent(
+	data AuthData,
+) {
+	<body hx-boost>
+		<h1>Auth</h1>
+		@Errors(data.Errors)
+		<form action={ templ.SafeURL(data.Path) } method="post">
+			<label for="password">Password:</label>
+			<input name="password" id="password" type="password"/>
+			<input type="submit" value="Auth"/>
+		</form>
+	</body>
+}

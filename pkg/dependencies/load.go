@@ -6,6 +6,7 @@ import (
 	"github.com/opoccomaxao/installable-bot-concept/pkg/endpoints"
 	"github.com/opoccomaxao/installable-bot-concept/pkg/server"
 	"github.com/opoccomaxao/installable-bot-concept/pkg/services/auth"
+	"github.com/opoccomaxao/installable-bot-concept/pkg/services/demo"
 	"github.com/samber/do"
 )
 
@@ -30,6 +31,7 @@ func LoadInto(i *do.Injector) error {
 	db.Provide(i, config.DBLocal)
 	endpoints.Provide(i)
 	auth.Provide(i)
+	demo.Provide(i)
 
 	return nil
 }
